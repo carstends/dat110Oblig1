@@ -80,16 +80,17 @@ public class RPCUtils {
 
 		byte[] encoded = new byte[5];
 		
-		//remember that an integer in java is 4 bytes
+		encoded[0] = rpcid;
+        encoded[1] = (byte) ((x >> 24) & 0xff);
+        encoded[2] = (byte) ((x >> 16) & 0xff);
+        encoded[3] = (byte) ((x >> 8) & 0xff);
+        encoded[4] = (byte) ((x) & 0xff);
 
-		// TODO: marshall RPC identifier and string (int?) into byte array
-
-		for(int i = 0; i < 4; i++) {
-			encoded[i+1] = (byte) (x >> (i *8));
+        return encoded;
 		}
 
-		return encoded;
-	}
+		
+	
 
 	public static int unmarshallInteger(byte[] data) {
 
